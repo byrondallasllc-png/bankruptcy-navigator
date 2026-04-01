@@ -6,6 +6,7 @@ on:
       - main
       - "claude/quizzical-bartik"
       - "claude/quizzical-bartik-D74PS"
+      - "claude/bankruptcy-guidance-app-eNoWJ"
     paths:
       - "docs/**"
 

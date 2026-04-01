@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Results – Bankruptcy Navigator</title>
+  <meta name="description" content="Your personalized bankruptcy chapter recommendation and step-by-step to-do checklist." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .section-card {
+      background: #fff;
+      border-radius: var(--radius);
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.75rem;
+      overflow: hidden;
+    }
+    .section-card-header {
+      background: var(--gray-50);
+      padding: .85rem 1.5rem;
+      border-bottom: 1px solid var(--gray-200);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--gray-800);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .section-card-body { padding: 1.5rem; }
+
+    .todo-progress-bar {
+      background: var(--gray-200);
+      border-radius: 99px;
+      height: 8px;
+      overflow: hidden;
+      margin: .5rem 0;
+    }
+    .todo-progress-fill {
+      height: 100%;
+      background: var(--green-500);
+      border-radius: 99px;
+      transition: width .4s ease;
+    }
+
+    @media (max-width: 600px) {
+      .section-card-body { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ─────────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="site-logo">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Bankruptcy Navigator
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="results.html" class="active">My Results</a>
+      <a href="resources.html">Resources</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="container">
+
+  <!-- No data message (hidden by default) -->
+  <div id="no-data-msg" hidden style="text-align:center;padding:4rem 1rem">
+    <div style="font-size:3rem;margin-bottom:1rem">📋</div>
+    <h2 style="margin-bottom:.5rem">No Assessment Found</h2>
+    <p style="color:var(--gray-600);margin-bottom:1.5rem">
+      It looks like you haven't completed the assessment yet, or your browser cleared the stored data.
+    </p>
+    <a href="assessment.html" class="btn btn-primary btn-lg">Take the Assessment →</a>
+  </div>
+
+  <!-- Results content -->
+  <div id="results-content">
+
+    <!-- Top action bar -->
+    <div class="flex justify-between items-center flex-wrap gap-1 mt-2 mb-3 no-print">
+      <div>
+        <h1 style="font-size:1.4rem;font-weight:800">Your Bankruptcy Assessment Results</h1>
+        <p class="text-sm text-muted">Based on the information you provided. Not legal advice.</p>
+      </div>
+      <div class="flex gap-1 flex-wrap">
+        <button id="print-btn" class="btn btn-ghost btn-sm">🖨 Print / Save PDF</button>
+        <a href="assessment.html" class="btn btn-outline btn-sm">← Retake Assessment</a>
+      </div>
+    </div>
+
+    <div class="disclaimer mb-3">
+      <strong>Reminder:</strong> This recommendation is based on simplified rules and the information you entered.
+      It is educational only and not legal advice. Verify your eligibility and options with a licensed bankruptcy attorney.
+    </div>
+
+    <!-- ── Recommendation hero ───────────────────────────── -->
+    <div id="result-hero" class="result-hero"></div>
+
+    <!-- ── Key financial numbers ─────────────────────────── -->
+    <div class="section-card">
+      <div class="section-card-header">📊 Your Financial Snapshot</div>
+      <div class="section-card-body">
+        <div id="key-numbers" class="grid-3"></div>
+      </div>
+    </div>
+
+    <!-- ── Why this chapter ───────────────────────────────── -->
+    <div class="section-card">
+      <div class="section-card-header">✅ Why This Recommendation</div>
+      <div class="section-card-body">
+        <ul id="reasons-list" class="checklist"></ul>
+      </div>
+    </div>
+
+    <!-- ── Concerns / Flags ───────────────────────────────── -->
+    <div class="section-card" id="concerns-wrap">
+      <div class="section-card-header" style="background:var(--amber-50);color:var(--amber-700)">
+        ⚠️ Important Considerations for Your Situation
+      </div>
+      <div class="section-card-body">
+        <ul id="concerns-list" style="list-style:none"></ul>
+      </div>
+    </div>
+
+    <!-- ── Chapter details ────────────────────────────────── -->
+    <div class="section-card">
+      <div class="section-card-header">📘 About Your Recommended Chapter</div>
+      <div class="section-card-body">
+        <div id="chapter-details"></div>
+      </div>
+    </div>
+
+    <!-- ── To-do checklist ────────────────────────────────── -->
+    <div class="section-card">
+      <div class="section-card-header">✅ Your Personal To-Do Checklist</div>
+      <div class="section-card-body">
+        <!-- Progress -->
+        <div style="background:var(--green-50);border-radius:var(--radius-sm);padding:1rem 1.25rem;margin-bottom:1.5rem;border:1px solid var(--green-100)">
+          <div class="flex justify-between items-center mb-1">
+            <span style="font-weight:700;font-size:.9rem;color:var(--green-700)">Your Progress</span>
+            <span id="todo-pct" style="font-size:.85rem;color:var(--green-700);font-weight:600">0 / 0 completed</span>
+          </div>
+          <div class="todo-progress-bar">
+            <div class="todo-progress-fill" id="todo-bar" style="width:0%"></div>
+          </div>
+          <div style="font-size:.75rem;color:var(--gray-500);margin-top:.35rem">
+            Check off each task as you complete it. Progress is saved in your browser.
+          </div>
+        </div>
+
+        <div id="checklist-wrap"></div>
+      </div>
+    </div>
+
+    <!-- ── Chapter comparison table ──────────────────────── -->
+    <div class="section-card">
+      <div class="section-card-header">⚖️ Chapter Comparison</div>
+      <div class="section-card-body">
+        <div id="compare-table-wrap"></div>
+      </div>
+    </div>
+
+    <!-- ── Next steps CTA ─────────────────────────────────── -->
+    <div class="card" style="background:linear-gradient(135deg,var(--blue-900),#1e4080);color:#fff;text-align:center;padding:2.5rem 1.5rem;margin-bottom:2rem">
+      <h2 style="font-size:1.4rem;font-weight:800;margin-bottom:.5rem">Next Steps</h2>
+      <p style="color:rgba(255,255,255,.8);margin-bottom:1.5rem;max-width:480px;margin-left:auto;margin-right:auto">
+        This tool gives you direction — but a licensed bankruptcy attorney will guide you through the specifics of your case.
+      </p>
+      <div class="flex gap-1 justify-between flex-wrap" style="justify-content:center">
+        <a href="resources.html" class="btn btn-success">
+          🌱 Credit Rebuilding Resources
+        </a>
+        <a href="https://www.nacba.org/" target="_blank" rel="noopener" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.5)">
+          Find a Bankruptcy Attorney ↗
+        </a>
+      </div>
+    </div>
+
+  </div><!-- /results-content -->
+
+</div>
+</main>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="container">
+    <p><strong>Bankruptcy Navigator</strong> — For informational purposes only. Not legal advice.</p>
+    <p style="margin-top:.4rem">&copy; 2026 Bankruptcy Navigator</p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/results.js"></script>
+</body>
+</html>

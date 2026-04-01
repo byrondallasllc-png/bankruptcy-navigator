@@ -3,164 +3,363 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bankruptcy Navigator</title>
+  <title>Bankruptcy Navigator – Free Guidance &amp; Chapter Finder</title>
+  <meta name="description" content="Free tool to help you understand bankruptcy, find the right chapter for your situation, and navigate every step of the process." />
+  <link rel="stylesheet" href="css/styles.css" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: #f0f4f8;
-      color: #1a202c;
-      min-height: 100vh;
+    /* ── Landing-specific styles ── */
+    .how-step {
       display: flex;
-      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-start;
     }
-
-    header {
-      background: #1a365d;
+    .how-step-num {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: var(--blue-700);
       color: #fff;
-      padding: 2rem 1.5rem;
-      text-align: center;
-    }
-
-    header h1 {
-      font-size: 2.25rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-    }
-
-    header p {
-      margin-top: 0.5rem;
-      font-size: 1.1rem;
-      color: #bee3f8;
-    }
-
-    main {
-      flex: 1;
-      max-width: 900px;
-      margin: 2.5rem auto;
-      padding: 0 1.5rem;
-      width: 100%;
-    }
-
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .card {
-      background: #fff;
-      border-radius: 10px;
-      padding: 1.75rem 1.5rem;
-      box-shadow: 0 1px 4px rgba(0,0,0,.08);
-      border-top: 4px solid #2b6cb0;
-    }
-
-    .card h2 {
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: #2b6cb0;
-      margin-bottom: 0.6rem;
-    }
-
-    .card p {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: #4a5568;
-    }
-
-    .intro {
-      background: #fff;
-      border-radius: 10px;
-      padding: 1.75rem 1.5rem;
-      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+      font-weight: 800;
       font-size: 1rem;
-      line-height: 1.7;
-      color: #4a5568;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
+    .how-step-body h3 { font-size: 1rem; font-weight: 700; margin-bottom: .25rem; }
+    .how-step-body p  { font-size: .875rem; color: var(--gray-600); line-height: 1.5; }
 
-    .intro strong { color: #1a202c; }
-
-    footer {
-      text-align: center;
+    .chapter-card {
+      border-radius: var(--radius);
       padding: 1.5rem;
-      font-size: 0.85rem;
-      color: #718096;
-      background: #e2e8f0;
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .2s, transform .2s;
     }
+    .chapter-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .chapter-card .chapter-num {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 0.25rem;
+    }
+    .chapter-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: .4rem; }
+    .chapter-card p  { font-size: .85rem; color: var(--gray-600); line-height: 1.55; }
+    .chapter-card .chapter-pill {
+      display: inline-block;
+      padding: .2rem .7rem;
+      border-radius: 99px;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .3px;
+      margin-bottom: .75rem;
+    }
+
+    .stat-box {
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+    .stat-num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--blue-700);
+      line-height: 1;
+      margin-bottom: .35rem;
+    }
+    .stat-label {
+      font-size: .85rem;
+      color: var(--gray-600);
+      line-height: 1.4;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--gray-200);
+      padding: 1rem 0;
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      font-weight: 700;
+      font-size: .95rem;
+      color: var(--gray-900);
+      margin-bottom: .35rem;
+    }
+    .faq-a {
+      font-size: .875rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    .cta-section {
+      background: linear-gradient(135deg, var(--blue-900), #1e4080);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: #fff;
+    }
+    .cta-section h2 { font-size: 1.75rem; font-weight: 800; margin-bottom: .75rem; }
+    .cta-section p  { color: rgba(255,255,255,.8); margin-bottom: 1.75rem; max-width: 500px; margin-left: auto; margin-right: auto; }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Bankruptcy Navigator</h1>
-  <p>Guidance and resources for navigating the bankruptcy process</p>
+<!-- ── Header ─────────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="site-logo">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Bankruptcy Navigator
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html" class="active">Home</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="results.html">My Results</a>
+      <a href="resources.html">Resources</a>
+    </nav>
+  </div>
 </header>
 
+<!-- ── Hero ───────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">Free &bull; Educational &bull; Confidential</div>
+    <h1>Navigate Bankruptcy<br>With Confidence</h1>
+    <p>
+      Find out which bankruptcy chapter fits your situation, get a personalized
+      step-by-step guide, and discover how to rebuild your credit afterward —
+      all in one place.
+    </p>
+    <div class="hero-cta">
+      <a href="assessment.html" class="btn btn-success btn-lg">
+        Start Free Assessment →
+      </a>
+      <a href="#how-it-works" class="btn btn-outline btn-lg" style="color:#fff;border-color:rgba(255,255,255,.5)">
+        How It Works
+      </a>
+    </div>
+  </div>
+</section>
+
 <main>
-  <div class="intro">
-    <strong>Bankruptcy Navigator</strong> is a resource designed to help individuals and businesses
-    understand their options when facing financial hardship. Whether you are exploring Chapter 7,
-    Chapter 11, or Chapter 13 bankruptcy, this site provides clear, accessible information to
-    help you make informed decisions.
-  </div>
+<div class="container">
 
-  <div class="card-grid">
-    <div class="card">
-      <h2>Chapter 7 &mdash; Liquidation</h2>
-      <p>
-        A fresh start for individuals. Non-exempt assets may be sold to repay creditors,
-        and most remaining unsecured debts are discharged at the end of the process.
-      </p>
-    </div>
-
-    <div class="card">
-      <h2>Chapter 11 &mdash; Reorganization</h2>
-      <p>
-        Primarily for businesses. Allows a debtor to remain operational while restructuring
-        debts under a court-approved repayment plan.
-      </p>
-    </div>
-
-    <div class="card">
-      <h2>Chapter 13 &mdash; Repayment Plan</h2>
-      <p>
-        For individuals with regular income. Debts are reorganized into a 3&ndash;5 year
-        repayment plan, allowing debtors to keep their assets.
-      </p>
-    </div>
-
-    <div class="card">
-      <h2>Automatic Stay</h2>
-      <p>
-        Filing for bankruptcy triggers an automatic stay that immediately halts most
-        collection actions, foreclosures, repossessions, and wage garnishments.
-      </p>
-    </div>
-
-    <div class="card">
-      <h2>Means Test</h2>
-      <p>
-        To qualify for Chapter 7, your income must fall below a threshold or pass a
-        means test comparing income to allowable expenses.
-      </p>
-    </div>
-
-    <div class="card">
-      <h2>Exemptions</h2>
-      <p>
-        Federal and state exemptions protect certain property (home equity, vehicle,
-        retirement accounts) from liquidation during bankruptcy.
-      </p>
+  <!-- ── Stats bar ──────────────────────────────────────────── -->
+  <div class="card mt-4" style="padding:0">
+    <div class="grid-3" style="gap:0">
+      <div class="stat-box" style="border-right:1px solid var(--gray-200)">
+        <div class="stat-num">~400K</div>
+        <div class="stat-label">Bankruptcy filings per year<br>in the U.S.</div>
+      </div>
+      <div class="stat-box" style="border-right:1px solid var(--gray-200)">
+        <div class="stat-num">3–6 mo</div>
+        <div class="stat-label">Typical Chapter 7<br>process length</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">~2 yrs</div>
+        <div class="stat-label">To qualify for<br>FHA loan after bankruptcy</div>
+      </div>
     </div>
   </div>
+
+  <!-- ── How it works ───────────────────────────────────────── -->
+  <div class="section-header mt-4" id="how-it-works">
+    <h2>How It Works</h2>
+    <p>Three steps from confusion to clarity.</p>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;flex-direction:column;gap:1.5rem">
+      <div class="how-step">
+        <div class="how-step-num">1</div>
+        <div class="how-step-body">
+          <h3>Answer the intake questions</h3>
+          <p>A short, 5-step questionnaire covering your income, debts, assets, and goals.
+             No personal information is sent anywhere — everything stays in your browser.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">2</div>
+        <div class="how-step-body">
+          <h3>Get your chapter recommendation</h3>
+          <p>Our engine compares your situation against the Means Test, Chapter 13 debt limits, and key
+             eligibility factors to recommend Chapter 7, 13, or 11 — and explain why.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">3</div>
+        <div class="how-step-body">
+          <h3>Follow your personalized to-do list</h3>
+          <p>Check off every step from credit counseling and document gathering through discharge
+             and credit rebuilding — with notes and tips at each stage.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Chapter overview ───────────────────────────────────── -->
+  <div class="section-header mt-4">
+    <h2>Understanding the Chapter Types</h2>
+    <p>Bankruptcy law offers different tools for different situations.</p>
+  </div>
+
+  <div class="grid-3">
+    <div class="chapter-card">
+      <div class="chapter-num" style="color:var(--green-500)">7</div>
+      <span class="chapter-pill" style="background:var(--green-100);color:var(--green-700)">Liquidation</span>
+      <h3>Fresh Start</h3>
+      <p>Most unsecured debts (credit cards, medical bills) are discharged after a trustee reviews your assets.
+         Process completes in 3–6 months. Requires passing the Means Test.</p>
+      <div class="mt-2">
+        <span class="badge badge-green">3–6 months</span>
+        <span class="badge badge-green" style="margin-left:.35rem">$338 fee</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-num" style="color:var(--blue-700)">13</div>
+      <span class="chapter-pill" style="background:var(--blue-100);color:var(--blue-800)">Repayment Plan</span>
+      <h3>Save Your Home &amp; Car</h3>
+      <p>Reorganize debts into a 3–5 year repayment plan. Keep your assets. Catch up on mortgage
+         arrears to stop foreclosure. Requires regular income.</p>
+      <div class="mt-2">
+        <span class="badge badge-blue">3–5 years</span>
+        <span class="badge badge-blue" style="margin-left:.35rem">$313 fee</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-num" style="color:var(--amber-500)">11</div>
+      <span class="chapter-pill" style="background:var(--amber-100);color:var(--amber-700)">Reorganization</span>
+      <h3>Business Restructure</h3>
+      <p>For businesses or individuals with very high debt. Continue operating while restructuring
+         under a court-approved plan. Subchapter V available for small businesses.</p>
+      <div class="mt-2">
+        <span class="badge badge-amber">1–3+ years</span>
+        <span class="badge badge-amber" style="margin-left:.35rem">$1,738 fee</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── What's covered ─────────────────────────────────────── -->
+  <div class="section-header mt-4">
+    <h2>What This Tool Covers</h2>
+  </div>
+
+  <div class="grid-2">
+    <div class="card card--accent">
+      <div class="card-title">📋 Intake &amp; Assessment</div>
+      <ul style="list-style:none;margin-top:.75rem">
+        <li style="padding:.35rem 0;font-size:.875rem;border-bottom:1px solid var(--gray-100)">✓ Income vs. state median comparison</li>
+        <li style="padding:.35rem 0;font-size:.875rem;border-bottom:1px solid var(--gray-100)">✓ Simplified Means Test calculation</li>
+        <li style="padding:.35rem 0;font-size:.875rem;border-bottom:1px solid var(--gray-100)">✓ Debt type classification (secured, unsecured, priority)</li>
+        <li style="padding:.35rem 0;font-size:.875rem;border-bottom:1px solid var(--gray-100)">✓ Chapter 13 debt limit check</li>
+        <li style="padding:.35rem 0;font-size:.875rem">✓ Asset and equity analysis</li>
+      </ul>
+    </div>
+
+    <div class="card card--accent">
+      <div class="card-title">✅ Step-by-Step Guidance</div>
+      <ul style="list-style:none;margin-top:.75rem">
+        <li style="padding:.35rem 0;font-size:.875rem;border-bottom:1px solid var(--gray-100)">✓ Chapter-specific to-do checklist</li>
+        <li style="padding:.35rem 0;font-size:.875rem;border-bottom:1px solid var(--gray-100)">✓ Before, during, and after filing steps</li>
+        <li style="padding:.35rem 0;font-size:.875rem;border-bottom:1px solid var(--gray-100)">✓ Document checklist with tips</li>
+        <li style="padding:.35rem 0;font-size:.875rem;border-bottom:1px solid var(--gray-100)">✓ Timeline and fee information</li>
+        <li style="padding:.35rem 0;font-size:.875rem">✓ Key warnings and flags for your situation</li>
+      </ul>
+    </div>
+
+    <div class="card card--green">
+      <div class="card-title">🌱 Credit Rebuilding Plan</div>
+      <ul style="list-style:none;margin-top:.75rem">
+        <li style="padding:.35rem 0;font-size:.875rem;border-bottom:1px solid var(--gray-100)">✓ Month-by-month recovery timeline</li>
+        <li style="padding:.35rem 0;font-size:.875rem;border-bottom:1px solid var(--gray-100)">✓ Secured card and credit-builder loan options</li>
+        <li style="padding:.35rem 0;font-size:.875rem;border-bottom:1px solid var(--gray-100)">✓ Credit report dispute guide</li>
+        <li style="padding:.35rem 0;font-size:.875rem;border-bottom:1px solid var(--gray-100)">✓ FHA and conventional mortgage timelines</li>
+        <li style="padding:.35rem 0;font-size:.875rem">✓ Budgeting and financial planning resources</li>
+      </ul>
+    </div>
+
+    <div class="card card--amber">
+      <div class="card-title">📚 Legal Resources</div>
+      <ul style="list-style:none;margin-top:.75rem">
+        <li style="padding:.35rem 0;font-size:.875rem;border-bottom:1px solid var(--gray-100)">✓ Free and low-cost attorney directories</li>
+        <li style="padding:.35rem 0;font-size:.875rem;border-bottom:1px solid var(--gray-100)">✓ Self-help filing tools for Chapter 7</li>
+        <li style="padding:.35rem 0;font-size:.875rem;border-bottom:1px solid var(--gray-100)">✓ Official court forms and instructions</li>
+        <li style="padding:.35rem 0;font-size:.875rem;border-bottom:1px solid var(--gray-100)">✓ Credit counseling agency finder</li>
+        <li style="padding:.35rem 0;font-size:.875rem">✓ CFPB and USCourts.gov guides</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── FAQ ────────────────────────────────────────────────── -->
+  <div class="section-header mt-4">
+    <h2>Frequently Asked Questions</h2>
+  </div>
+
+  <div class="card">
+    <div class="faq-item">
+      <div class="faq-q">Will bankruptcy ruin my credit forever?</div>
+      <div class="faq-a">No. Chapter 7 stays on your credit report for 10 years and Chapter 13 for 7 years — but the impact
+        fades significantly over time, especially as you rebuild. Many people qualify for credit cards within 1–2 years
+        and FHA mortgages within 2 years of discharge.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Do I need a lawyer to file bankruptcy?</div>
+      <div class="faq-a">You are legally allowed to file "pro se" (without an attorney), and for simple Chapter 7 cases
+        tools like Upsolve.org can help. However, Chapter 13 and 11 cases are complex and an attorney is strongly recommended.
+        Many bankruptcy attorneys offer free consultations and accept payment plans.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I keep my house and car?</div>
+      <div class="faq-a">In Chapter 7, you can keep secured property if you are current on payments and the equity is
+        within your state's exemption limits. In Chapter 13, you can catch up on mortgage arrears and keep your home
+        even if you're behind — this is one of Chapter 13's biggest advantages.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What debts cannot be discharged?</div>
+      <div class="faq-a">Most student loans, child support, alimony, recent tax debts, criminal fines, and debts
+        from fraud are generally non-dischargeable. Some older income taxes may be dischargeable — ask your attorney.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How does the Means Test work?</div>
+      <div class="faq-a">The Means Test compares your average monthly income over the past 6 months to your state's
+        median income for your household size. If you're below the median, you generally qualify for Chapter 7.
+        If above, your disposable income (after allowed expenses) is calculated — if it's low enough, you may still qualify.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is this tool a substitute for legal advice?</div>
+      <div class="faq-a">No. This tool provides educational information only and cannot account for all variables in your
+        situation. Bankruptcy law is complex and state-specific. Always consult a licensed bankruptcy attorney before
+        making any filing decisions.</div>
+    </div>
+  </div>
+
+  <!-- ── CTA ────────────────────────────────────────────────── -->
+  <div class="cta-section mt-4 mb-4">
+    <h2>Ready to Find Your Path Forward?</h2>
+    <p>The assessment takes about 5 minutes and your answers never leave your device.</p>
+    <a href="assessment.html" class="btn btn-success btn-lg">
+      Start Free Assessment →
+    </a>
+    <div style="margin-top:1.25rem;font-size:.8rem;color:rgba(255,255,255,.6)">
+      No account required &bull; No personal data sent &bull; Completely free
+    </div>
+  </div>
+
+</div>
 </main>
 
-<footer>
-  &copy; 2026 Bankruptcy Navigator &mdash; Informational purposes only. Not legal advice.
-  Always consult a licensed attorney for guidance specific to your situation.
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="container">
+    <p>
+      <strong>Bankruptcy Navigator</strong> &mdash; Free educational tool for informational purposes only.
+    </p>
+    <p style="margin-top:.4rem">
+      Not legal advice. Always consult a licensed bankruptcy attorney before filing.
+      &copy; 2026 Bankruptcy Navigator
+    </p>
+  </div>
 </footer>
 
 </body>

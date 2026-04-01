@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bankruptcy Assessment – Bankruptcy Navigator</title>
+  <meta name="description" content="Answer a few questions to find out which bankruptcy chapter fits your situation." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .wizard-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--gray-200);
+      overflow: hidden;
+    }
+    .wizard-header {
+      background: var(--blue-900);
+      color: #fff;
+      padding: 1.5rem 2rem 1.25rem;
+    }
+    .wizard-body {
+      padding: 2rem;
+    }
+    .wizard-footer {
+      padding: 1.25rem 2rem;
+      background: var(--gray-50);
+      border-top: 1px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .step-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: .25rem;
+    }
+    .step-desc {
+      font-size: .875rem;
+      color: rgba(255,255,255,.75);
+    }
+    .section-label {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--blue-700);
+      border-bottom: 2px solid var(--blue-100);
+      padding-bottom: .35rem;
+      margin-bottom: 1.1rem;
+      margin-top: .5rem;
+    }
+
+    @media (max-width: 600px) {
+      .wizard-body    { padding: 1.25rem; }
+      .wizard-footer  { padding: 1rem 1.25rem; flex-wrap: wrap; }
+      .wizard-header  { padding: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ─────────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="site-logo">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Bankruptcy Navigator
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="assessment.html" class="active">Assessment</a>
+      <a href="results.html">My Results</a>
+      <a href="resources.html">Resources</a>
+    </nav>
+  </div>
+</header>
+
+<main style="padding:2rem 0 3rem">
+<div class="container" style="max-width:680px">
+
+  <div class="disclaimer mb-3">
+    <strong>Educational Tool Only.</strong> This assessment provides general guidance based on simplified rules.
+    It is not legal advice. Always consult a licensed bankruptcy attorney before making any filing decisions.
+  </div>
+
+  <!-- ── Wizard card ─────────────────────────────────────── -->
+  <form id="assessment-form" novalidate>
+  <div class="wizard-card">
+
+    <!-- Header with progress -->
+    <div class="wizard-header">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">
+        <span id="step-counter" style="font-size:.85rem;color:rgba(255,255,255,.7)">Step 1 of 5</span>
+        <span style="font-size:.85rem;color:rgba(255,255,255,.7)">Bankruptcy Assessment</span>
+      </div>
+      <div class="progress-bar-wrap" style="margin-bottom:1rem">
+        <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+      </div>
+
+      <!-- Step dots -->
+      <div class="step-indicator" style="margin-bottom:.75rem">
+        <div class="step-dot active" data-step="1" title="Location &amp; Household">1</div>
+        <div class="step-dot" data-step="2" title="Income">2</div>
+        <div class="step-dot" data-step="3" title="Debts">3</div>
+        <div class="step-dot" data-step="4" title="Assets">4</div>
+        <div class="step-dot" data-step="5" title="Your Situation">5</div>
+      </div>
+
+      <!-- Dynamic step title -->
+      <div id="step-1-header">
+        <div class="step-title">Location &amp; Household</div>
+        <div class="step-desc">We use this to compare your income to your state's median.</div>
+      </div>
+      <div id="step-2-header" hidden>
+        <div class="step-title">Income</div>
+        <div class="step-desc">Your income determines Means Test eligibility for Chapter 7.</div>
+      </div>
+      <div id="step-3-header" hidden>
+        <div class="step-title">Your Debts</div>
+        <div class="step-desc">Tell us what you owe so we can recommend the right chapter.</div>
+      </div>
+      <div id="step-4-header" hidden>
+        <div class="step-title">Assets &amp; Property</div>
+        <div class="step-desc">What you own affects exemptions and trustee liquidation.</div>
+      </div>
+      <div id="step-5-header" hidden>
+        <div class="step-title">Your Situation</div>
+        <div class="step-desc">A few final questions to refine your recommendation.</div>
+      </div>
+    </div><!-- /wizard-header -->
+
+    <!-- ════════════════════════════════════════════════════
+         STEP 1 – Location & Household
+    ═════════════════════════════════════════════════════ -->
+    <div class="wizard-body step-panel" data-step="1">
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="state">State of Residence <span style="color:var(--red-700)">*</span></label>
+          <select id="state" name="state" class="form-control" required aria-required="true">
+            <option value="">— Select State —</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="householdSize">Household Size <span style="color:var(--red-700)">*</span></label>
+          <select id="householdSize" name="householdSize" class="form-control" required>
+            <option value="">— Select —</option>
+            <option value="1">1 (just me)</option>
+            <option value="2">2 people</option>
+            <option value="3">3 people</option>
+            <option value="4">4 people</option>
+            <option value="5">5 people</option>
+            <option value="6">6 people</option>
+            <option value="7">7 people</option>
+            <option value="8">8+ people</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Marital Status</label>
+        <div class="radio-group" style="flex-direction:row;flex-wrap:wrap;gap:.5rem 1.5rem">
+          <label class="radio-option"><input type="radio" name="maritalStatus" value="single" checked> Single</label>
+          <label class="radio-option"><input type="radio" name="maritalStatus" value="married"> Married</label>
+          <label class="radio-option"><input type="radio" name="maritalStatus" value="separated"> Separated</label>
+          <label class="radio-option"><input type="radio" name="maritalStatus" value="divorced"> Divorced</label>
+          <label class="radio-option"><input type="radio" name="maritalStatus" value="widowed"> Widowed</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Filing as:</label>
+        <div class="radio-group" style="flex-direction:row;gap:1.5rem">
+          <label class="radio-option"><input type="radio" name="filingType" value="individual" checked> Individual</label>
+          <label class="radio-option"><input type="radio" name="filingType" value="joint"> Joint (with spouse)</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Primary reason for financial hardship</label>
+        <select id="hardshipReason" class="form-control">
+          <option value="">— Select —</option>
+          <option value="job-loss">Job loss / Reduced income</option>
+          <option value="medical">Medical bills / Illness</option>
+          <option value="divorce">Divorce / Separation</option>
+          <option value="business">Business failure</option>
+          <option value="overspending">Overspending / Credit card debt</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+    </div><!-- /step 1 -->
+
+    <!-- ════════════════════════════════════════════════════
+         STEP 2 – Income
+    ═════════════════════════════════════════════════════ -->
+    <div class="wizard-body step-panel" data-step="2" hidden>
+
+      <div class="alert alert-info mb-3">
+        <strong>Why we ask:</strong> The Means Test compares your average monthly gross income
+        over the past 6 months to your state's median to determine Chapter 7 eligibility.
+      </div>
+
+      <div class="section-label">Monthly Household Income</div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="monthlyGrossIncome">Monthly Gross Income <span style="color:var(--red-700)">*</span></label>
+          <div class="input-prefix">
+            <span>$</span>
+            <input type="number" id="monthlyGrossIncome" class="form-control"
+                   placeholder="0" min="0" step="1" required data-currency>
+          </div>
+          <span class="form-hint">Before taxes and deductions. Include all household members.</span>
+        </div>
+        <div class="form-group">
+          <label for="monthlyExpenses">Monthly Living Expenses</label>
+          <div class="input-prefix">
+            <span>$</span>
+            <input type="number" id="monthlyExpenses" class="form-control"
+                   placeholder="0" min="0" step="1" data-currency>
+          </div>
+          <span class="form-hint">Rent/mortgage, food, utilities, transportation, insurance, etc.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Primary income source</label>
+        <div class="radio-group" style="flex-direction:row;flex-wrap:wrap;gap:.5rem 1.5rem">
+          <label class="radio-option"><input type="radio" name="incomeSource" value="employment" checked> Employment (W-2)</label>
+          <label class="radio-option"><input type="radio" name="incomeSource" value="self-employment"> Self-employed / 1099</label>
+          <label class="radio-option"><input type="radio" name="incomeSource" value="social-security"> Social Security / Disability</label>
+          <label class="radio-option"><input type="radio" name="incomeSource" value="other"> Other / Mixed</label>
+          <label class="radio-option"><input type="radio" name="incomeSource" value="none"> No income</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Is your income regular and consistent?</label>
+        <div class="radio-group" style="flex-direction:row;gap:1.5rem">
+          <label class="radio-option"><input type="radio" name="hasRegularIncome" value="yes" checked> Yes – I have predictable income each month</label>
+          <label class="radio-option"><input type="radio" name="hasRegularIncome" value="no"> No – my income is irregular or uncertain</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>What is your primary goal with bankruptcy?</label>
+        <select id="primaryGoal" class="form-control">
+          <option value="eliminate-debt">Eliminate as much debt as possible quickly</option>
+          <option value="save-home">Save my home from foreclosure</option>
+          <option value="save-car">Keep my car</option>
+          <option value="restructure">Restructure / manage debt over time</option>
+          <option value="business">Restructure my business</option>
+        </select>
+      </div>
+
+    </div><!-- /step 2 -->
+
+    <!-- ════════════════════════════════════════════════════
+         STEP 3 – Debts
+    ═════════════════════════════════════════════════════ -->
+    <div class="wizard-body step-panel" data-step="3" hidden>
+
+      <div class="section-label">Unsecured Debts</div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="creditCardDebt">Credit Cards &amp; Personal Loans</label>
+          <div class="input-prefix">
+            <span>$</span>
+            <input type="number" id="creditCardDebt" class="form-control" placeholder="0" min="0" step="1" data-currency>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="medicalDebt">Medical Bills</label>
+          <div class="input-prefix">
+            <span>$</span>
+            <input type="number" id="medicalDebt" class="form-control" placeholder="0" min="0" step="1" data-currency>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="taxDebt">Tax Debt (IRS / State)</label>
+          <div class="input-prefix">
+            <span>$</span>
+            <input type="number" id="taxDebt" class="form-control" placeholder="0" min="0" step="1" data-currency>
+          </div>
+          <span class="form-hint">Most recent tax debts are non-dischargeable.</span>
+        </div>
+        <div class="form-group">
+          <label for="studentLoanDebt">Student Loans</label>
+          <div class="input-prefix">
+            <span>$</span>
+            <input type="number" id="studentLoanDebt" class="form-control" placeholder="0" min="0" step="1" data-currency>
+          </div>
+          <span class="form-hint">Generally not dischargeable in bankruptcy.</span>
+        </div>
+      </div>
+
+      <div class="section-label">Secured Debts</div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="mortgageBalance">Mortgage Balance</label>
+          <div class="input-prefix">
+            <span>$</span>
+            <input type="number" id="mortgageBalance" class="form-control" placeholder="0" min="0" step="1" data-currency>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="carLoanBalance">Car Loan(s) Balance</label>
+          <div class="input-prefix">
+            <span>$</span>
+            <input type="number" id="carLoanBalance" class="form-control" placeholder="0" min="0" step="1" data-currency>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="businessDebt">Business Debt</label>
+          <div class="input-prefix">
+            <span>$</span>
+            <input type="number" id="businessDebt" class="form-control" placeholder="0" min="0" step="1" data-currency>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-label">Current Status</div>
+
+      <div class="form-group">
+        <div class="checkbox-group" style="flex-direction:column;gap:.65rem">
+          <label class="checkbox-option">
+            <input type="checkbox" name="behindOnMortgage" id="behindOnMortgage">
+            I am behind on my mortgage payments
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="facingForeclosure" id="facingForeclosure">
+            I am facing foreclosure (or received a foreclosure notice)
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="behindOnCar" id="behindOnCar">
+            I am behind on car payments (or facing repossession)
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="hasLawsuits" id="hasLawsuits">
+            I have active lawsuits or judgments against me
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="hasGarnishment" id="hasGarnishment">
+            My wages are currently being garnished
+          </label>
+        </div>
+      </div>
+
+    </div><!-- /step 3 -->
+
+    <!-- ════════════════════════════════════════════════════
+         STEP 4 – Assets
+    ═════════════════════════════════════════════════════ -->
+    <div class="wizard-body step-panel" data-step="4" hidden>
+
+      <div class="alert alert-info mb-3">
+        <strong>Why we ask:</strong> Your assets determine what a trustee might liquidate in Chapter 7
+        and what you'll need to protect via state exemptions.
+      </div>
+
+      <div class="section-label">Property Values</div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="homeValue">Home Value (estimated)</label>
+          <div class="input-prefix">
+            <span>$</span>
+            <input type="number" id="homeValue" class="form-control" placeholder="0" min="0" step="1" data-currency>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="homeEquity">Home Equity</label>
+          <div class="input-prefix">
+            <span>$</span>
+            <input type="number" id="homeEquity" class="form-control" placeholder="0" min="0" step="1" data-currency>
+          </div>
+          <span class="form-hint">Home value minus what you owe on the mortgage.</span>
+        </div>
+        <div class="form-group">
+          <label for="vehicleValue">Total Vehicle Value</label>
+          <div class="input-prefix">
+            <span>$</span>
+            <input type="number" id="vehicleValue" class="form-control" placeholder="0" min="0" step="1" data-currency>
+          </div>
+          <span class="form-hint">Current market value of all vehicles you own.</span>
+        </div>
+        <div class="form-group">
+          <label for="retirementValue">Retirement Accounts (401k, IRA, etc.)</label>
+          <div class="input-prefix">
+            <span>$</span>
+            <input type="number" id="retirementValue" class="form-control" placeholder="0" min="0" step="1" data-currency>
+          </div>
+          <span class="form-hint">Usually fully protected in bankruptcy.</span>
+        </div>
+        <div class="form-group">
+          <label for="savingsValue">Savings &amp; Bank Accounts</label>
+          <div class="input-prefix">
+            <span>$</span>
+            <input type="number" id="savingsValue" class="form-control" placeholder="0" min="0" step="1" data-currency>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="otherAssetsValue">Other Assets (investments, valuables)</label>
+          <div class="input-prefix">
+            <span>$</span>
+            <input type="number" id="otherAssetsValue" class="form-control" placeholder="0" min="0" step="1" data-currency>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Would you be willing to surrender non-exempt assets if it means a faster discharge?</label>
+        <div class="radio-group" style="flex-direction:row;gap:1.5rem">
+          <label class="radio-option"><input type="radio" name="willingToSurrenderAssets" value="yes"> Yes</label>
+          <label class="radio-option"><input type="radio" name="willingToSurrenderAssets" value="no" checked> No – I want to keep my assets</label>
+          <label class="radio-option"><input type="radio" name="willingToSurrenderAssets" value="maybe"> Not sure</label>
+        </div>
+      </div>
+
+    </div><!-- /step 4 -->
+
+    <!-- ════════════════════════════════════════════════════
+         STEP 5 – Situation
+    ═════════════════════════════════════════════════════ -->
+    <div class="wizard-body step-panel" data-step="5" hidden>
+
+      <div class="form-group">
+        <label>Are you a business owner?</label>
+        <div class="radio-group" style="flex-direction:row;gap:1.5rem">
+          <label class="radio-option"><input type="radio" name="isBusinessOwner" value="yes"> Yes – I own a business</label>
+          <label class="radio-option"><input type="radio" name="isBusinessOwner" value="no" checked> No</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Have you filed for bankruptcy in the last 8 years?</label>
+        <div class="radio-group" style="flex-direction:row;gap:1.5rem">
+          <label class="radio-option"><input type="radio" name="priorBankruptcy" value="no" checked> No</label>
+          <label class="radio-option"><input type="radio" name="priorBankruptcy" value="yes"> Yes</label>
+        </div>
+      </div>
+
+      <div class="form-group" id="prior-chapter-group" style="display:none">
+        <label>Which chapter was your prior filing?</label>
+        <div class="radio-group" style="flex-direction:row;gap:1.5rem">
+          <label class="radio-option"><input type="radio" name="priorBankruptcyChapter" value="7"> Chapter 7</label>
+          <label class="radio-option"><input type="radio" name="priorBankruptcyChapter" value="13"> Chapter 13</label>
+          <label class="radio-option"><input type="radio" name="priorBankruptcyChapter" value="11"> Chapter 11</label>
+          <label class="radio-option"><input type="radio" name="priorBankruptcyChapter" value="other"> Other / Not sure</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Are you current on your income tax filings?</label>
+        <div class="radio-group" style="flex-direction:row;gap:1.5rem">
+          <label class="radio-option"><input type="radio" name="taxFilingsCurrent" value="yes" checked> Yes</label>
+          <label class="radio-option"><input type="radio" name="taxFilingsCurrent" value="no"> No – I have unfiled returns</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Do you receive domestic support (child support or alimony)?</label>
+        <div class="radio-group" style="flex-direction:row;gap:1.5rem">
+          <label class="radio-option"><input type="radio" name="domesticSupport" value="no" checked> No</label>
+          <label class="radio-option"><input type="radio" name="domesticSupport" value="pays"> I pay domestic support</label>
+          <label class="radio-option"><input type="radio" name="domesticSupport" value="receives"> I receive domestic support</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Have you consulted with a bankruptcy attorney yet?</label>
+        <div class="radio-group" style="flex-direction:row;flex-wrap:wrap;gap:.5rem 1.5rem">
+          <label class="radio-option"><input type="radio" name="hasAttorney" value="no" checked> No – not yet</label>
+          <label class="radio-option"><input type="radio" name="hasAttorney" value="consulted"> Had a consultation</label>
+          <label class="radio-option"><input type="radio" name="hasAttorney" value="hired"> Yes – hired an attorney</label>
+        </div>
+      </div>
+
+      <div class="disclaimer mt-3">
+        <strong>Important:</strong> By clicking "Get My Recommendation" you acknowledge that this tool
+        provides educational information only and is not legal advice. Results are based on the information
+        you provided and general rules — your actual eligibility depends on many factors.
+        Consult a licensed bankruptcy attorney for guidance specific to your situation.
+      </div>
+
+    </div><!-- /step 5 -->
+
+    <!-- ── Wizard footer (nav buttons) ─────────────────────── -->
+    <div class="wizard-footer">
+      <button type="button" class="btn btn-ghost btn-back" id="btn-back-1" style="visibility:hidden">
+        ← Back
+      </button>
+      <div style="flex:1"></div>
+      <!-- Steps 1–4: Next button -->
+      <button type="button" class="btn btn-primary btn-next">Next Step →</button>
+    </div>
+
+  </div><!-- /wizard-card -->
+  </form>
+
+</div>
+</main>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="container">
+    <p><strong>Bankruptcy Navigator</strong> — For informational purposes only. Not legal advice.</p>
+    <p style="margin-top:.4rem">&copy; 2026 Bankruptcy Navigator</p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/engine.js"></script>
+<script>
+  // ── Step header sync ──────────────────────────────────────
+  const origUpdateStep = typeof updateStep === 'function' ? updateStep : null;
+
+  // Show/hide prior chapter group
+  document.querySelectorAll('input[name="priorBankruptcy"]').forEach(r => {
+    r.addEventListener('change', () => {
+      const show = document.querySelector('input[name="priorBankruptcy"]:checked').value === 'yes';
+      document.getElementById('prior-chapter-group').style.display = show ? 'block' : 'none';
+    });
+  });
+
+  // Patch updateStep to sync header visibility
+  function syncStepHeader(step) {
+    for (let i = 1; i <= 5; i++) {
+      const h = document.getElementById(`step-${i}-header`);
+      if (h) h.hidden = i !== step;
+    }
+    // Back button visibility
+    const backBtn = document.querySelector('.btn-back');
+    if (backBtn) backBtn.style.visibility = step > 1 ? 'visible' : 'hidden';
+
+    // On step 5, swap Next → Submit
+    const nextBtn = document.querySelector('.btn-next');
+    const footer  = document.querySelector('.wizard-footer');
+    if (step === 5) {
+      if (nextBtn) nextBtn.style.display = 'none';
+      if (!document.getElementById('btn-submit')) {
+        const sub = document.createElement('button');
+        sub.type = 'button';
+        sub.id   = 'btn-submit';
+        sub.className = 'btn btn-success btn-lg';
+        sub.textContent = '🎯 Get My Recommendation';
+        footer.appendChild(sub);
+        sub.addEventListener('click', submitAssessment);
+      }
+    } else {
+      if (nextBtn) nextBtn.style.display = '';
+      const sub = document.getElementById('btn-submit');
+      if (sub) sub.style.display = 'none';
+    }
+  }
+</script>
+<script src="js/assessment.js"></script>
+<script>
+  // Hook into updateStep to also sync headers
+  const _origUpdate = updateStep;
+  // Re-wrap
+  (function() {
+    const original = updateStep;
+    window.updateStep = function(step) {
+      original(step);
+      syncStepHeader(step);
+    };
+    // Init
+    syncStepHeader(1);
+  })();
+</script>
+</body>
+</html>

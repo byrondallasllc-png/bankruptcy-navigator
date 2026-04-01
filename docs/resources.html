@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Post-Bankruptcy Resources – Bankruptcy Navigator</title>
+  <meta name="description" content="Rebuild your credit after bankruptcy. Step-by-step timeline, secured card options, credit-builder loans, and financial education resources." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .resource-card {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: .85rem 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .resource-card:last-child { border-bottom: none; }
+    .resource-card-body { flex: 1; }
+    .resource-card-name {
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--gray-900);
+      margin-bottom: .15rem;
+    }
+    .resource-card-desc {
+      font-size: .825rem;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+
+    .milestone-card {
+      background: #fff;
+      border-radius: var(--radius);
+      border: 1px solid var(--gray-200);
+      padding: 1.25rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .milestone-period {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--blue-700);
+      margin-bottom: .5rem;
+    }
+    .milestone-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: .5rem;
+    }
+    .milestone-items {
+      list-style: none;
+      margin: 0;
+    }
+    .milestone-items li {
+      font-size: .85rem;
+      color: var(--gray-700);
+      padding: .25rem 0;
+      padding-left: 1.1rem;
+      position: relative;
+    }
+    .milestone-items li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--green-500);
+      font-weight: 700;
+    }
+
+    .score-guide {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+    }
+    .score-cell {
+      padding: .6rem .5rem;
+      text-align: center;
+      font-size: .75rem;
+    }
+    .score-cell .range { font-weight: 800; font-size: .85rem; }
+    .score-cell .label { margin-top: .15rem; color: var(--gray-700); }
+
+    .tip-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+    }
+    .tip-list li {
+      display: flex;
+      gap: .7rem;
+      align-items: flex-start;
+      font-size: .875rem;
+      color: var(--gray-700);
+      line-height: 1.5;
+    }
+    .tip-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: .05rem;
+    }
+
+    .mortgage-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+    .mortgage-table th {
+      background: var(--blue-900); color: #fff;
+      padding: .55rem .85rem; text-align: left; font-weight: 600;
+    }
+    .mortgage-table td {
+      padding: .55rem .85rem; border-bottom: 1px solid var(--gray-200); line-height: 1.4;
+    }
+    .mortgage-table tr:nth-child(even) td { background: var(--gray-50); }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ─────────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="site-logo">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Bankruptcy Navigator
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="results.html">My Results</a>
+      <a href="resources.html" class="active">Resources</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="container">
+
+  <div class="section-header mt-2">
+    <h1 style="font-size:1.75rem;font-weight:800">Post-Bankruptcy Resources</h1>
+    <p>Your roadmap to rebuilding credit, restoring financial health, and moving forward.</p>
+  </div>
+
+  <!-- ── Credit score guide ──────────────────────────────── -->
+  <div class="card mb-4">
+    <div class="card-title mb-2">Understanding Your Credit Score</div>
+    <div class="score-guide">
+      <div class="score-cell" style="background:#fee2e2">
+        <div class="range" style="color:#b91c1c">300–579</div>
+        <div class="label">Poor</div>
+      </div>
+      <div class="score-cell" style="background:#fef3c7">
+        <div class="range" style="color:#b45309">580–669</div>
+        <div class="label">Fair</div>
+      </div>
+      <div class="score-cell" style="background:#d1fae5">
+        <div class="range" style="color:#047857">670–739</div>
+        <div class="label">Good</div>
+      </div>
+      <div class="score-cell" style="background:#bfdbfe">
+        <div class="range" style="color:#1d4ed8">740–799</div>
+        <div class="label">Very Good</div>
+      </div>
+      <div class="score-cell" style="background:#ede9fe">
+        <div class="range" style="color:#6d28d9">800–850</div>
+        <div class="label">Exceptional</div>
+      </div>
+    </div>
+    <p class="text-sm text-muted mt-2">
+      After discharge your score typically drops to the 500–550 range. With consistent rebuilding effort,
+      most people reach the "Good" range (670+) within 2–4 years.
+    </p>
+  </div>
+
+  <!-- ── Rebuilding timeline ─────────────────────────────── -->
+  <div class="section-header">
+    <h2>Credit Rebuilding Timeline</h2>
+    <p>What to focus on and when after your discharge.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.1rem;margin-bottom:2rem">
+
+    <div class="milestone-card" style="border-top:4px solid var(--red-700)">
+      <div class="milestone-period" style="color:var(--red-700)">Immediately After Discharge</div>
+      <div class="milestone-title">Foundation</div>
+      <ul class="milestone-items">
+        <li>Pull all 3 free credit reports (AnnualCreditReport.com)</li>
+        <li>Dispute any incorrect balances or status errors</li>
+        <li>Open a secured credit card with low deposit</li>
+        <li>Set up automatic minimum payments</li>
+        <li>Create a realistic monthly budget</li>
+        <li>Build a small emergency fund ($500–$1,000)</li>
+      </ul>
+    </div>
+
+    <div class="milestone-card" style="border-top:4px solid var(--amber-500)">
+      <div class="milestone-period" style="color:var(--amber-700)">Months 3–12</div>
+      <div class="milestone-title">Steady Progress</div>
+      <ul class="milestone-items">
+        <li>Pay secured card in full each month</li>
+        <li>Open a second secured card (if managing first well)</li>
+        <li>Consider a credit-builder loan (Self, credit union)</li>
+        <li>Become an authorized user on a family member's card</li>
+        <li>Keep credit utilization below 30% on each card</li>
+        <li>Check credit score monthly (free via Credit Karma)</li>
+      </ul>
+    </div>
+
+    <div class="milestone-card" style="border-top:4px solid var(--blue-500)">
+      <div class="milestone-period" style="color:var(--blue-700)">Year 1–2</div>
+      <div class="milestone-title">Building Momentum</div>
+      <ul class="milestone-items">
+        <li>Score often reaches 580–620 range</li>
+        <li>Request upgrade from secured to unsecured card</li>
+        <li>Apply for a small store or gas credit card</li>
+        <li>Finance a small purchase (auto loan with co-signer)</li>
+        <li>Continue building emergency fund (3 months' expenses)</li>
+        <li>Review credit reports quarterly for errors</li>
+      </ul>
+    </div>
+
+    <div class="milestone-card" style="border-top:4px solid var(--green-500)">
+      <div class="milestone-period" style="color:var(--green-700)">Year 2–4</div>
+      <div class="milestone-title">Recovery</div>
+      <ul class="milestone-items">
+        <li>Score often reaches 650–700+ range</li>
+        <li>FHA mortgage possible after 2 years (Ch.7) or 1 year (Ch.13)</li>
+        <li>VA loan possible after 2 years from Ch.7 discharge</li>
+        <li>Conventional mortgage eligibility improving</li>
+        <li>Apply for rewards credit cards</li>
+        <li>Review and adjust investment/retirement contributions</li>
+      </ul>
+    </div>
+
+    <div class="milestone-card" style="border-top:4px solid #7c3aed">
+      <div class="milestone-period" style="color:#7c3aed">Year 4–7+</div>
+      <div class="milestone-title">Strong Financial Health</div>
+      <ul class="milestone-items">
+        <li>Ch.13 falls off credit report after 7 years from filing</li>
+        <li>Ch.7 falls off credit report after 10 years from filing</li>
+        <li>Score often reaches 700+ with consistent habits</li>
+        <li>Conventional mortgage now accessible</li>
+        <li>Strong credit card options available</li>
+        <li>Focus on wealth building: investing, retirement, savings</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- ── Mortgage waiting periods ───────────────────────── -->
+  <div class="section-header">
+    <h2>Mortgage Waiting Periods After Bankruptcy</h2>
+    <p>When you can qualify for a home loan depends on the loan type and chapter.</p>
+  </div>
+
+  <div class="card mb-4" style="padding:0;overflow:hidden">
+    <div style="overflow-x:auto">
+    <table class="mortgage-table">
+      <thead>
+        <tr>
+          <th>Loan Type</th>
+          <th>After Chapter 7</th>
+          <th>After Chapter 13</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>FHA Loan</strong></td>
+          <td>2 years from discharge</td>
+          <td>1 year of plan payments + court permission</td>
+          <td>Most accessible post-bankruptcy. 3.5% down with 580+ score.</td>
+        </tr>
+        <tr>
+          <td><strong>VA Loan</strong></td>
+          <td>2 years from discharge</td>
+          <td>1 year of plan payments + court permission</td>
+          <td>For eligible veterans/service members. No down payment required.</td>
+        </tr>
+        <tr>
+          <td><strong>USDA Loan</strong></td>
+          <td>3 years from discharge</td>
+          <td>1 year of plan payments + court permission</td>
+          <td>For rural/suburban areas. No down payment required.</td>
+        </tr>
+        <tr>
+          <td><strong>Conventional</strong></td>
+          <td>4 years from discharge</td>
+          <td>2 years from discharge</td>
+          <td>Fannie Mae/Freddie Mac guidelines. Better rates for higher scores.</td>
+        </tr>
+        <tr>
+          <td><strong>Jumbo Loan</strong></td>
+          <td>7 years from discharge</td>
+          <td>7 years from discharge</td>
+          <td>For loan amounts exceeding conforming limits.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="text-sm text-muted" style="padding:.75rem 1rem">
+      Waiting periods may be shorter with extenuating circumstances (job loss, medical events). Lender requirements vary.
+    </p>
+  </div>
+
+  <!-- ── Credit factors ──────────────────────────────────── -->
+  <div class="section-header">
+    <h2>The 5 Factors That Build Your Score</h2>
+  </div>
+
+  <div class="grid-2 mb-4">
+    <div class="card card--accent">
+      <div class="card-title">Payment History — 35%</div>
+      <p style="font-size:.875rem;color:var(--gray-600);margin-top:.5rem;line-height:1.55">
+        The single most important factor. Even one missed payment can significantly hurt your score.
+        Set up autopay for at least the minimum on every account.
+      </p>
+      <div class="alert alert-success mt-2" style="font-size:.8rem">
+        <strong>Action:</strong> Automate all bill payments. Never miss a due date.
+      </div>
+    </div>
+    <div class="card card--accent">
+      <div class="card-title">Credit Utilization — 30%</div>
+      <p style="font-size:.875rem;color:var(--gray-600);margin-top:.5rem;line-height:1.55">
+        How much of your available credit you're using. Keep each card below 30%, ideally below 10%
+        for maximum score impact.
+      </p>
+      <div class="alert alert-success mt-2" style="font-size:.8rem">
+        <strong>Action:</strong> Pay down balances. Request credit limit increases after 6–12 months.
+      </div>
+    </div>
+    <div class="card card--green">
+      <div class="card-title">Length of Credit History — 15%</div>
+      <p style="font-size:.875rem;color:var(--gray-600);margin-top:.5rem;line-height:1.55">
+        Older accounts help more. Keep your secured card open even after upgrading — the age of the
+        account continues to benefit your score.
+      </p>
+      <div class="alert alert-success mt-2" style="font-size:.8rem">
+        <strong>Action:</strong> Don't close old accounts. Become an authorized user on a long-standing account.
+      </div>
+    </div>
+    <div class="card card--green">
+      <div class="card-title">Credit Mix — 10%</div>
+      <p style="font-size:.875rem;color:var(--gray-600);margin-top:.5rem;line-height:1.55">
+        Having both revolving (credit cards) and installment (loans, auto) accounts shows you can manage
+        different types of credit responsibly.
+      </p>
+      <div class="alert alert-success mt-2" style="font-size:.8rem">
+        <strong>Action:</strong> A credit-builder loan adds an installment account to complement your cards.
+      </div>
+    </div>
+    <div class="card" style="grid-column:1/-1;border-top:4px solid var(--amber-500)">
+      <div class="card-title">New Credit (Hard Inquiries) — 10%</div>
+      <p style="font-size:.875rem;color:var(--gray-600);margin-top:.5rem;line-height:1.55">
+        Each credit application creates a hard inquiry that temporarily lowers your score by ~5 points.
+        Space out applications. Multiple mortgage/auto inquiries within 14–45 days typically count as one.
+      </p>
+      <div class="alert alert-warning mt-2" style="font-size:.8rem">
+        <strong>Tip:</strong> Pre-qualify (soft pull) before applying to avoid unnecessary hard inquiries.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Resources sections ──────────────────────────────── -->
+  <div class="section-header">
+    <h2>Recommended Tools &amp; Resources</h2>
+  </div>
+
+  <div class="grid-2">
+
+    <!-- Credit monitoring -->
+    <div class="card card--accent">
+      <div class="card-title mb-2">📊 Credit Monitoring (Free)</div>
+      <div>
+        <div class="resource-card">
+          <span class="badge badge-green" style="flex-shrink:0;margin-top:.1rem">Free</span>
+          <div class="resource-card-body">
+            <div class="resource-card-name">AnnualCreditReport.com</div>
+            <div class="resource-card-desc">Official site for free weekly credit reports from Equifax, Experian, and TransUnion. Start here — pull all 3 after discharge.</div>
+          </div>
+        </div>
+        <div class="resource-card">
+          <span class="badge badge-green" style="flex-shrink:0;margin-top:.1rem">Free</span>
+          <div class="resource-card-body">
+            <div class="resource-card-name">Credit Karma</div>
+            <div class="resource-card-desc">Free score tracking (TransUnion + Equifax), alerts when accounts change, and credit card recommendations for your profile.</div>
+          </div>
+        </div>
+        <div class="resource-card">
+          <span class="badge badge-green" style="flex-shrink:0;margin-top:.1rem">Free</span>
+          <div class="resource-card-body">
+            <div class="resource-card-name">Experian Free Membership</div>
+            <div class="resource-card-desc">Free FICO® Score 8 + Experian credit report, updated monthly. Direct from the bureau.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secured cards -->
+    <div class="card card--accent">
+      <div class="card-title mb-2">💳 Secured Credit Cards</div>
+      <div>
+        <div class="resource-card">
+          <span class="badge badge-blue" style="flex-shrink:0;margin-top:.1rem">Top Pick</span>
+          <div class="resource-card-body">
+            <div class="resource-card-name">Discover it® Secured</div>
+            <div class="resource-card-desc">No annual fee, earns 2% cash back at restaurants/gas and 1% everywhere else. Automatic review for unsecured upgrade at 7 months.</div>
+          </div>
+        </div>
+        <div class="resource-card">
+          <span class="badge badge-blue" style="flex-shrink:0;margin-top:.1rem">Top Pick</span>
+          <div class="resource-card-body">
+            <div class="resource-card-name">Capital One Platinum Secured</div>
+            <div class="resource-card-desc">Minimum $49–$200 deposit. Automatic credit limit review after 6 months of on-time payments. No annual fee.</div>
+          </div>
+        </div>
+        <div class="resource-card">
+          <span class="badge badge-amber" style="flex-shrink:0;margin-top:.1rem">No Check</span>
+          <div class="resource-card-body">
+            <div class="resource-card-name">OpenSky® Secured Visa</div>
+            <div class="resource-card-desc">No credit check required to apply. Reports to all 3 bureaus. Good if other secured cards are rejected.</div>
+          </div>
+        </div>
+        <div class="resource-card">
+          <span class="badge badge-amber" style="flex-shrink:0;margin-top:.1rem">No Check</span>
+          <div class="resource-card-body">
+            <div class="resource-card-name">Chime Credit Builder</div>
+            <div class="resource-card-desc">No annual fee, no interest, no minimum security deposit. Uses your own secured account. No credit check required.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Credit builder loans -->
+    <div class="card card--green">
+      <div class="card-title mb-2">🏦 Credit-Builder Loans</div>
+      <div>
+        <div class="resource-card">
+          <span class="badge badge-green" style="flex-shrink:0;margin-top:.1rem">Popular</span>
+          <div class="resource-card-body">
+            <div class="resource-card-name">Self (formerly Self Lender)</div>
+            <div class="resource-card-desc">Monthly payments go into a CD savings account. Reports to all 3 bureaus. You receive the savings (minus fees) at the end. Plans start at $25/month.</div>
+          </div>
+        </div>
+        <div class="resource-card">
+          <span class="badge badge-green" style="flex-shrink:0;margin-top:.1rem">Low Rate</span>
+          <div class="resource-card-body">
+            <div class="resource-card-name">Local Credit Unions</div>
+            <div class="resource-card-desc">Many credit unions offer credit-builder loans of $300–$1,000 at 6–12% APR. Search "credit union credit builder loan near me" or use NCUA's credit union locator.</div>
+          </div>
+        </div>
+        <div class="resource-card">
+          <span class="badge badge-green" style="flex-shrink:0;margin-top:.1rem">New Option</span>
+          <div class="resource-card-body">
+            <div class="resource-card-name">Kikoff Credit Account</div>
+            <div class="resource-card-desc">$5/month membership that reports as an installment account to Equifax and Experian. Easy approval process.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Legal & counseling -->
+    <div class="card card--amber">
+      <div class="card-title mb-2">⚖️ Legal &amp; Counseling Help</div>
+      <div>
+        <div class="resource-card">
+          <span class="badge badge-green" style="flex-shrink:0;margin-top:.1rem">Free</span>
+          <div class="resource-card-body">
+            <div class="resource-card-name">Legal Services Corporation (LSC)</div>
+            <div class="resource-card-desc">Federally funded network providing free legal help to low-income individuals. Find a local office at lsc.gov.</div>
+          </div>
+        </div>
+        <div class="resource-card">
+          <span class="badge badge-blue" style="flex-shrink:0;margin-top:.1rem">Find Atty</span>
+          <div class="resource-card-body">
+            <div class="resource-card-name">NACBA – National Assoc. of Consumer Bankruptcy Attorneys</div>
+            <div class="resource-card-desc">Directory of qualified consumer bankruptcy attorneys nationwide. nacba.org/find-a-cbca.</div>
+          </div>
+        </div>
+        <div class="resource-card">
+          <span class="badge badge-green" style="flex-shrink:0;margin-top:.1rem">Free Tool</span>
+          <div class="resource-card-body">
+            <div class="resource-card-name">Upsolve.org</div>
+            <div class="resource-card-desc">Nonprofit tool to help low-income filers complete Chapter 7 paperwork for free. Has helped thousands file without an attorney.</div>
+          </div>
+        </div>
+        <div class="resource-card">
+          <span class="badge badge-blue" style="flex-shrink:0;margin-top:.1rem">Official</span>
+          <div class="resource-card-body">
+            <div class="resource-card-name">USCourts.gov – Bankruptcy Basics</div>
+            <div class="resource-card-desc">Official federal court guide to the bankruptcy process, forms, fee schedules, and court locations.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Financial education -->
+    <div class="card" style="grid-column:1/-1;border-top:4px solid #7c3aed">
+      <div class="card-title mb-2">📚 Financial Education</div>
+      <div class="grid-2" style="gap:0">
+        <div>
+          <div class="resource-card">
+            <span class="badge badge-green" style="flex-shrink:0;margin-top:.1rem">Free</span>
+            <div class="resource-card-body">
+              <div class="resource-card-name">NFCC – National Foundation for Credit Counseling</div>
+              <div class="resource-card-desc">Free and low-cost nonprofit credit counseling, budgeting, and debt management plans. nfcc.org.</div>
+            </div>
+          </div>
+          <div class="resource-card">
+            <span class="badge badge-blue" style="flex-shrink:0;margin-top:.1rem">Gov</span>
+            <div class="resource-card-body">
+              <div class="resource-card-name">Consumer Financial Protection Bureau (CFPB)</div>
+              <div class="resource-card-desc">Official guides on budgeting, credit, debt, and your rights as a consumer. consumerfinance.gov.</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="resource-card">
+            <span class="badge badge-green" style="flex-shrink:0;margin-top:.1rem">Free</span>
+            <div class="resource-card-body">
+              <div class="resource-card-name">Khan Academy – Personal Finance</div>
+              <div class="resource-card-desc">Free video courses covering budgeting, credit, saving, investing, and taxes. khanacademy.org.</div>
+            </div>
+          </div>
+          <div class="resource-card">
+            <span class="badge badge-blue" style="flex-shrink:0;margin-top:.1rem">Gov</span>
+            <div class="resource-card-body">
+              <div class="resource-card-name">MyMoney.gov</div>
+              <div class="resource-card-desc">U.S. government financial literacy hub. Tools for budgeting, planning, and understanding financial products.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── Top 10 tips ─────────────────────────────────────── -->
+  <div class="section-header mt-4">
+    <h2>Top 10 Credit Rebuilding Tips</h2>
+  </div>
+
+  <div class="card mb-4">
+    <ul class="tip-list">
+      <li><span class="tip-icon">1️⃣</span><span><strong>Pull your credit reports immediately</strong> — Verify that discharged debts show $0 balance and "discharged in bankruptcy." Dispute any errors with each bureau.</span></li>
+      <li><span class="tip-icon">2️⃣</span><span><strong>Open one secured credit card</strong> — Use it for a small recurring purchase (like Netflix or gas) and pay it off in full each month. This builds payment history.</span></li>
+      <li><span class="tip-icon">3️⃣</span><span><strong>Never miss a payment</strong> — Set up autopay for the minimum on every account. Payment history is 35% of your score. One missed payment can undo months of progress.</span></li>
+      <li><span class="tip-icon">4️⃣</span><span><strong>Keep utilization below 30%</strong> — If your card has a $500 limit, keep the balance below $150. Below 10% is even better. Pay early if needed to lower the reported balance.</span></li>
+      <li><span class="tip-icon">5️⃣</span><span><strong>Add a credit-builder loan</strong> — A credit-builder loan from Self or a credit union adds an installment account to your credit mix, which strengthens your score.</span></li>
+      <li><span class="tip-icon">6️⃣</span><span><strong>Become an authorized user</strong> — Ask a family member with a long-standing, low-utilization credit card to add you as an authorized user. Their history can help your score.</span></li>
+      <li><span class="tip-icon">7️⃣</span><span><strong>Build an emergency fund</strong> — Even $500–$1,000 in savings prevents you from reaching for credit cards in an emergency. Aim for 3–6 months of expenses over time.</span></li>
+      <li><span class="tip-icon">8️⃣</span><span><strong>Don't apply for too many accounts at once</strong> — Space out credit applications. Each hard inquiry slightly lowers your score. Pre-qualify using soft pulls before applying.</span></li>
+      <li><span class="tip-icon">9️⃣</span><span><strong>Monitor your score monthly</strong> — Use free tools like Credit Karma or Experian. Watching your progress is motivating and helps you catch problems early.</span></li>
+      <li><span class="tip-icon">🔟</span><span><strong>Be patient and consistent</strong> — Credit rebuilding after bankruptcy takes 2–4 years of consistent behavior. Every on-time payment is progress. The impact of bankruptcy fades significantly over time.</span></li>
+    </ul>
+  </div>
+
+  <!-- ── CTA ─────────────────────────────────────────────── -->
+  <div class="card" style="background:linear-gradient(135deg,var(--blue-900),#1e4080);color:#fff;text-align:center;padding:2.5rem 1.5rem;margin-bottom:2rem">
+    <h2 style="font-size:1.4rem;font-weight:800;margin-bottom:.5rem">Haven't Taken the Assessment Yet?</h2>
+    <p style="color:rgba(255,255,255,.8);margin-bottom:1.5rem;max-width:480px;margin-left:auto;margin-right:auto">
+      Find out which bankruptcy chapter fits your situation and get your personalized to-do checklist.
+    </p>
+    <a href="assessment.html" class="btn btn-success btn-lg">Start Free Assessment →</a>
+  </div>
+
+</div>
+</main>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="container">
+    <p><strong>Bankruptcy Navigator</strong> — For informational purposes only. Not legal advice.</p>
+    <p style="margin-top:.4rem">
+      Resource links are provided for reference and do not constitute an endorsement.
+      Always verify information with official sources. &copy; 2026 Bankruptcy Navigator
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
